@@ -1,0 +1,26 @@
+services: 
+- name: openai-api-decorator
+  host: localhost
+  port: 8000
+  routes:
+  - name: openai-api-decorator
+    paths:
+    - "~/decorator$"
+    methods:
+    - POST
+    plugins:
+    - name: ai-proxy
+      config:
+        route_type: "llm/v1/chat"
+        auth:
+          header_name: "Authorization"
+          header_value: "{vault://env/KONG_COHERE_AUTH_HEADER}"
+        model:
+          provider: "cohere"
+          name: "command-r"
+    - name: ai-prompt-decorator
+      config:
+        prompts:
+          append:
+          - role: "user"
+            content: "ただし、回答文の最後にCohereで回答したことが分かる文章を追加して。"

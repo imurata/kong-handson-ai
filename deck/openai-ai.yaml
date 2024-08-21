@@ -1,0 +1,20 @@
+services: 
+- name: openai-api
+  host: localhost
+  port: 8000
+  routes:
+  - name: openai-api_openai-chat
+    paths:
+    - "~/openai-chat$"
+    methods:
+    - POST
+    plugins:
+    - name: ai-proxy
+      config:
+        route_type: "llm/v1/chat"
+        auth:
+          header_name: "Authorization"
+          header_value: "{vault://env/KONG_OPENAI_AUTH_HEADER}"
+        model:
+          provider: "openai"
+          name: "gpt-4"

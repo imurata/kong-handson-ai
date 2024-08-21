@@ -1,0 +1,22 @@
+services: 
+- name: public-httpbin
+  host: httpbin.org
+  path: /
+  protocol: https
+  port: 443
+  routes:
+  - name: httpbin-transformer
+    paths:
+    - /req-transformer
+    plugins:
+    - name: ai-request-transformer
+      config:
+        prompt: JSON内のクレジットカードの番号を全てマスクして
+        llm:
+          route_type: llm/v1/chat
+          auth:
+            header_name: Authorization
+            header_value: "{vault://env/KONG_COHERE_AUTH_HEADER}"
+          model:
+            provider: cohere
+            name: command-r

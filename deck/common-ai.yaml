@@ -1,0 +1,41 @@
+services: 
+- name: common-ai
+  host: localhost
+  port: 8000
+  routes:
+  - name: openai
+    headers:
+      llm:
+      - openai
+    paths:
+    - "~/common-ai$"
+    methods:
+    - POST
+    plugins:
+    - name: ai-proxy
+      config:
+        route_type: "llm/v1/chat"
+        auth:
+          header_name: "Authorization"
+          header_value: "{vault://env/KONG_OPENAI_AUTH_HEADER}"
+        model:
+          provider: "openai"
+          name: "gpt-4"
+  - name: cohere
+    headers:
+      llm:
+      - cohere
+    paths:
+    - "~/common-ai$"
+    methods:
+    - POST
+    plugins:
+    - name: ai-proxy
+      config:
+        route_type: "llm/v1/chat"
+        auth:
+          header_name: "Authorization"
+          header_value: "{vault://env/KONG_COHERE_AUTH_HEADER}"
+        model:
+          provider: "cohere"
+          name: "command-r"

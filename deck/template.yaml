@@ -1,0 +1,38 @@
+services: 
+- name: openai-api-template
+  host: localhost
+  port: 8000
+  routes:
+  - name: openai-api-template
+    paths:
+    - "~/template$"
+    methods:
+    - POST
+    plugins:
+    - name: ai-proxy
+      config:
+        route_type: "llm/v1/chat"
+        auth:
+          header_name: "Authorization"
+          header_value: "{vault://env/KONG_COHERE_AUTH_HEADER}"
+        model:
+          provider: "cohere"
+          name: "command-r"
+    - name: ai-prompt-template
+      config:
+        allow_untemplated_requests: true
+        templates:
+          - name: "programmer"
+            template: |
+              {
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "貴方はプログラマーであり、{{language}}という言語の専門家です。"
+                  },
+                  {
+                    "role": "user",
+                    "content": "{{program}}というプログラムのコードを日本語のコメント付きで書いてください。なお、コピペしたいので貴方自身のコメントは不要です"
+                  }
+                ]
+              }

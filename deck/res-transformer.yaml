@@ -1,0 +1,26 @@
+services: 
+- name: res-transformer
+  host: nginx
+  path: /
+  protocol: http
+  port: 80
+  routes:
+  - name: nginx
+    paths:
+    - /nginx
+  - name: res-transformer
+    paths:
+    - /res-transformer
+    plugins:
+    - name: ai-response-transformer
+      enabled: true
+      config:
+        prompt: htmlの「Welcome to nginx!」の表示の上に「7/1より1ヶ月メンテナンスを実施します」とフォントサイズH3、赤い色で一文追加して。
+        llm:
+          route_type: llm/v1/chat
+          auth:
+            header_name: Authorization
+            header_value: "{vault://env/KONG_COHERE_AUTH_HEADER}"
+          model:
+            provider: cohere
+            name: command-r
