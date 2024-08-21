@@ -1,5 +1,5 @@
 services: 
-- name: cohere-api
+- name: cohere-api-proxy
   host: localhost
   port: 8000
   routes:

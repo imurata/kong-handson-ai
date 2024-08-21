@@ -1,11 +1,11 @@
 services: 
-- name: openai-api-guard
+- name: cohere-api-decorator
   host: localhost
   port: 8000
   routes:
-  - name: openai-api-guard
+  - name: cohere-api-decorator
     paths:
-    - "~/guard$"
+    - "~/decorator$"
     methods:
     - POST
     plugins:
@@ -18,7 +18,9 @@ services:
         model:
           provider: "cohere"
           name: "command-r"
-    - name: ai-prompt-guard
+    - name: ai-prompt-decorator
       config:
-        deny_patterns:
-        - .*4[0-9]{3}-[0-9]{4}-[0-9]{4}-[0-9]{4}.*
+        prompts:
+          append:
+          - role: "user"
+            content: "ただし、回答文の最後にCohereで回答したことが分かる文章を追加して。"

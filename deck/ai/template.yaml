@@ -1,9 +1,9 @@
 services: 
-- name: openai-api-template
+- name: cohere-api-template
   host: localhost
   port: 8000
   routes:
-  - name: openai-api-template
+  - name: cohere-api-template
     paths:
     - "~/template$"
     methods:
