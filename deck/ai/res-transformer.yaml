@@ -1,5 +1,5 @@
 services: 
-- name: res-transformer
+- name: nginx-for-res-transformer
   host: nginx
   path: /
   protocol: http

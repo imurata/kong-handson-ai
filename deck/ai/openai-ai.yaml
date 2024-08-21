@@ -1,9 +1,9 @@
 services: 
-- name: openai-api
+- name: openai-api-proxy
   host: localhost
   port: 8000
   routes:
-  - name: openai-api_openai-chat
+  - name: openai-chat
     paths:
     - "~/openai-chat$"
     methods:

@@ -1,5 +1,5 @@
 services: 
-- name: public-httpbin
+- name: httpbin-for-req-transformer
   host: httpbin.org
   path: /
   protocol: https

@@ -3,7 +3,7 @@ services:
   host: localhost
   port: 8000
   routes:
-  - name: cohere-api_cohere-chat
+  - name: cohere-chat
     paths:
     - "~/cohere-chat$"
     methods:
