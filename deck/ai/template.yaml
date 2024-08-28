@@ -18,6 +18,8 @@ services:
         model:
           provider: "cohere"
           name: "command-r"
+          options:
+            temperature: 1.0
     - name: ai-prompt-template
       config:
         allow_untemplated_requests: true
@@ -32,7 +34,7 @@ services:
                   },
                   {
                     "role": "user",
-                    "content": "{{program}}というプログラムのコードを日本語のコメント付きで書いてください。なお、コピペしたいので貴方自身のコメントは不要です"
+                    "content": "{{program}}のコードを書いてください。なお、コード以外を返答しないでください。"
                   }
                 ]
               }

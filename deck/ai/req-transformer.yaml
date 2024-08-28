@@ -11,7 +11,7 @@ services:
     plugins:
     - name: ai-request-transformer
       config:
-        prompt: JSON内のクレジットカードの番号を全てマスクして
+        prompt: JSON内のクレジットカードの番号を全てマスクして。それ以外は文章を加工しないで。
         llm:
           route_type: llm/v1/chat
           auth:
@@ -20,3 +20,4 @@ services:
           model:
             provider: cohere
             name: command-r
+            

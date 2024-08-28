@@ -18,3 +18,5 @@ services:
         model:
           provider: "cohere"
           name: "command-r"
+          options:
+            temperature: 1.0

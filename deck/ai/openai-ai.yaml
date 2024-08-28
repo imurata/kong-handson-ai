@@ -18,3 +18,5 @@ services:
         model:
           provider: "openai"
           name: "gpt-4"
+          options:
+            temperature: 1.0

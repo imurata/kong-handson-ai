@@ -21,6 +21,8 @@ services:
         model:
           provider: "openai"
           name: "gpt-4"
+          options:
+            temperature: 1.0
   - name: common-cohere
     headers:
       llm:
@@ -39,3 +41,5 @@ services:
         model:
           provider: "cohere"
           name: "command-r"
+          options:
+            temperature: 1.0

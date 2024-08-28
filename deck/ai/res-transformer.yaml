@@ -15,7 +15,7 @@ services:
     - name: ai-response-transformer
       enabled: true
       config:
-        prompt: htmlの「Welcome to nginx!」の表示の上に「7/1より1ヶ月メンテナンスを実施します」とフォントサイズH3、赤い色で一文追加して。
+        prompt: html内の「<h1>Welcome to nginx!</h1>」の表示の上に「7/1より1ヶ月メンテナンスを実施します」とフォントサイズH3、赤い色で一文追加して。Cohereは追加する以外の作業やコメントをしないこと。
         llm:
           route_type: llm/v1/chat
           auth:
